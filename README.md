@@ -13,6 +13,7 @@ Do budoucna i **zápis objednávek (OP) z B2B do ABRA** – v návrhu API už s 
 ## Dokumentace
 
 - [`docs/analyza-napojeni-abra-b2b.md`](docs/analyza-napojeni-abra-b2b.md) – technická analýza: mapování požadavků na objekty ABRA Gen REST API, příklady dotazů, otevřené otázky a checklist.
+- [`examples/`](examples/) – spustitelné ukázky (health-check) pro otestování spojení proti reálné instanci ABRA. Spouštět ze stroje na VPN, ne z cloud sandboxu.
 
 ## Stav
 

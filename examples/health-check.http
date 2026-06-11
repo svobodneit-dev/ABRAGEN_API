@@ -1,0 +1,22 @@
+### Health-check ABRA Gen Web API
+### Pro VS Code "REST Client" nebo IntelliJ HTTP Client.
+### POZOR: spouštět ze stroje, který na ABRA síťově vidí (VPN / B2B server),
+### NE z cloud sandboxu – tam je odchozí provoz blokovaný.
+
+@host = abra.firma.cz
+@port = 443
+@conn = firemnidata
+@user = apiuser
+@pass = tajneheslo
+
+### 1) LIVENESS – root endpoint (bez autentizace, bez názvu spojení)
+###    Očekáváme 200 + JSON s "connections": najdi své spojení, ověř isvalid/state/islocked.
+GET https://{{host}}:{{port}}/
+Accept: application/json
+
+### 2) READINESS – minimální autentizovaný dotaz (projde i login + čtení dat)
+###    200 = OK · 401 = špatné přihlášení / chybí flag "Nevizuální přihlášení (API)"
+###    403 = chybí právo · 404 = špatný název spojení
+GET https://{{host}}:{{port}}/{{conn}}/divisions?select=ID&take=1
+Authorization: Basic {{user}} {{pass}}
+Accept: application/json
